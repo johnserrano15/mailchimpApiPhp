@@ -1,16 +1,16 @@
 <?php
 
-$data = [
+  $data = [
     'email'     => $_POST['email'],
     'status'    => 'subscribed',
     'firstname' => $_POST['fname'],
     'lastname'  => 'No found'
-];
+  ];
 
-$httpCode = syncMailchimp($data);
-print $httpCode;
+  $httpCode = syncMailchimp($data);
+  print $httpCode;
 
-function syncMailchimp($data) {
+  function syncMailchimp($data) {
     $apiKey = '';
     $listId = '';
 
@@ -42,6 +42,6 @@ function syncMailchimp($data) {
     curl_close($ch);
 
     return $httpCode;
-}
+  }
 
 ?>
