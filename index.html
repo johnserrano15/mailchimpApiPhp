@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mailchimp</title>
+</head>
+<body>
+  <h3>Subscribe</h3>
+  <form id="form">
+    <input type="email" name="email" placeholder="Email">
+    <input type="text" name="fname" placeholder="Name">
+    <input type="submit" value="Enviar">
+  </form>
+  <span id="message" style="display: none;">
+    <h3></h3>
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    const $form = document.getElementById('form');
+
+    const syncMailchimp = (event) => {
+      event.preventDefault();
+      // console.log('hola mundo');
+      const data = new FormData($form);
+      const email = data.get('email');
+      const fname = data.get('fname');
+
+      $.post('http://localhost/mailchimp/mailchimpApi.php', { email: email, fname: fname }, (data, status) => {
+        console.log(data);
+        // console.log(status);
+        if (status == 'success') {
+          $('#message').show();
+          if (data == 200) {
+            $('#message h3').text('Thanks for subscribing');
+            $('#form').hide();
+          } else {
+            $('#message h3').text('Algo salio mal');
+          }
+        } else {
+          $('#message').show();
+          $('#message h3').text('Algo salio mal');
+        }
+      });
+    }
+
+    $form.addEventListener('submit', syncMailchimp);
+  </script>
+</body>
+</html>

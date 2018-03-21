@@ -1,14 +1,14 @@
 <?php
 
 $data = [
-    'email'     => 'johnserrano@gmail.com',
+    'email'     => $_POST['email'],
     'status'    => 'subscribed',
-    'firstname' => 'john',
-    'lastname'  => 'doe'
+    'firstname' => $_POST['fname'],
+    'lastname'  => 'No found'
 ];
 
-syncMailchimp($data);
-print syncMailchimp($data);
+$httpCode = syncMailchimp($data);
+print $httpCode;
 
 function syncMailchimp($data) {
     $apiKey = '';
